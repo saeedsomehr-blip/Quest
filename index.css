@@ -1,0 +1,709 @@
+/* src/index.css — نسخه‌ی مینیمال، بهینه و بدون تکرار */
+
+/* --------- Theme tokens --------- */
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e5e7eb;
+
+  --btn:#ffffff;
+  --btn-border:#e5e7eb;
+  --btn-hover:#f1f5f9;
+
+  --accent:#4f46e5;
+  --accent-weak:#eef2ff;
+
+  --success:#22c55e;
+  --danger:#ef4444;
+}
+
+.dark{
+  /* فقط با افزودن کلاس .dark به html/body، متغیرها اوورراید می‌شن */
+  --bg:#0b1220;
+  --card:#0f172a;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --border:#1f2937;
+
+  --btn:#0f172a;
+  --btn-border:#1f2937;
+  --btn-hover:#111827;
+
+  --accent:#60a5fa;
+  --accent-weak:#0b213f;
+}
+
+/* --------- Resets / base --------- */
+*{ box-sizing:border-box; }
+html,body,#root{ height:100%; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* --------- App layout --------- */
+.app-root{
+  min-height:100%;
+  display:grid;
+  place-items:start center;
+  padding:40px 20px 80px;
+  position:relative;
+}
+
+/* کارت عمومی */
+.card{
+  width:100%;
+  max-width:880px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 10px 26px rgba(0,0,0,.12);
+  padding:16px;
+}
+
+/* حالت «پارچمنت/فانتزی» ملایم برای حس open-world */
+body{
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #a5b4fc33, transparent),
+    radial-gradient(800px 400px at 80% 0%, #93c5fd33, transparent),
+    linear-gradient(180deg, var(--bg), #f8fafc 40%, #f1f5f9);
+}
+
+/* --------- Header / Stats / Progress --------- */
+.header{ display:grid; gap:10px; }
+.header .brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.header .logo{ font-size:22px; }
+.header h1{ margin:0; font-size:20px; letter-spacing:.2px; }
+.header .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.mono{ font-variant-numeric:tabular-nums; }
+.hint{ color:var(--muted); font-size:12px; }
+
+/* progress (native <progress>) */
+.bar{ width:100%; height:10px; appearance:none; margin-top:6px; border-radius:8px; }
+.bar::-webkit-progress-bar{ background:var(--accent-weak); border-radius:8px; }
+.bar::-webkit-progress-value{
+  background:linear-gradient(90deg, var(--success), #16a34a);
+  border-radius:8px;
+}
+
+/* --------- Inputs / Buttons --------- */
+input,textarea{ font:inherit; min-width:0; }
+input[type="text"], input[type="number"], textarea{
+  width:100%;
+  height:40px;
+  padding:0 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  outline:none;
+}
+textarea{ height:auto; padding:8px 12px; border-radius:10px; }
+input:focus, textarea:focus{
+  border-color:#c7d2fe;
+  box-shadow:0 0 0 4px rgba(59,130,246,.12);
+}
+
+.btn{
+  background:var(--btn);
+  color:var(--text);
+  border:1px solid var(--btn-border);
+  border-radius:10px;
+  padding:8px 12px;
+  height:40px;
+  cursor:pointer;
+}
+.btn:hover{ background:var(--btn-hover); }
+.btn.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+/* بخش افزودن تسک */
+.add{ display:flex; gap:10px; align-items:center; margin-top:16px; }
+.xpLabel{ font-size:12px; color:var(--muted); }
+.xpInput{ width:80px; height:38px; padding:0 10px; border:1px solid var(--border); border-radius:8px; }
+
+/* --------- Lists / meta --------- */
+.metaRow{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:12px; color:var(--muted); font-size:14px;
+}
+.actions{ display:flex; gap:8px; }
+.list{ margin-top:10px; display:grid; gap:8px; }
+.empty{ text-align:center; color:var(--muted); padding:20px 0; overflow-wrap:anywhere; word-break:break-word; }
+
+/* --------- Task row --------- */
+.task{
+  display:flex; gap:10px; align-items:center;
+  padding:10px; border:1px solid var(--border);
+  border-radius:14px; background:var(--card);
+}
+.task .title{ flex:1; overflow-wrap:anywhere; word-break:break-word; }
+.task .xp{ font-size:12px; color:#475569; }
+.task .icon{ background:transparent; border:0; cursor:pointer; font-size:18px; }
+.task.done{ opacity:.85; text-decoration:line-through; color:var(--muted); }
+
+/* فرم افزودن ساب‌تسک، بدون کارت سفید */
+.subadd{ padding:6px 2px; }
+
+/* deadline badge */
+.deadline{ font-size:12px; color:var(--muted); margin-top:2px; }
+.deadline.overdue{ color:var(--danger); font-weight:600; }
+
+/* achievement badge */
+.badge{
+  padding:6px 10px; border-radius:999px;
+  background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; font-size:12px;
+}
+.badge.on{ background:#e0f2fe; color:#0369a1; border-color:#bae6fd; }
+
+/* --------- Celebrations / floating symbols --------- */
+.symbols{
+  position:fixed; top:8px; left:50%; transform:translateX(-50%);
+  display:flex; flex-wrap:wrap; gap:4px; font-size:22px;
+  pointer-events:none; max-width:80%;
+}
+.toast{
+  position:fixed; top:20%; left:50%; transform:translateX(-50%);
+  background:#111827; color:#fff;
+  padding:8px 14px; border-radius:999px;
+  box-shadow:0 10px 20px rgba(0,0,0,.2);
+  font-weight:700; animation:fadeUp .9s ease both;
+}
+@keyframes fadeUp{
+  from{ opacity:0; transform:translate(-50%, 10px); }
+  to{ opacity:1; transform:translate(-50%, 0); }
+}
+
+/* --------- Global Music Player (sticky) --------- */
+.global-player{
+  position:sticky; top:0; z-index:40;
+  background:var(--card); color:var(--text);
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr auto auto auto;
+  gap:10px; padding:10px 12px;
+}
+.global-player .gp-title{
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-weight:500;
+}
+.global-player .gp-controls{ display:flex; gap:6px; align-items:center; }
+.global-player .gp-vol input{ width:120px; }
+.global-player .gp-view iframe{
+  width:320px; height:60px; border:0; border-radius:8px; background:#000;
+}
+.global-player .gp-view audio{ height:32px; width:320px; }
+
+/* ریسپانسیو پلیر */
+@media (max-width:720px){
+  .global-player{ grid-template-columns:1fr auto; grid-auto-rows:auto; }
+  .global-player .gp-view{ grid-column:1 / -1; }
+}
+/* پایه تم */
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e5e7eb;
+
+  --btn: #ffffff;
+  --btn-border: #e5e7eb;
+  --btn-hover: #f8fafc;
+
+  --accent: #4f46e5;
+  --accent-weak: #eef2ff;
+}
+
+/* دارک ملایم */
+.dark:root {
+  --bg: #0b1220;
+  --card: #0f172a;
+  --text: #e2e8f0;
+  --muted: #9aa4b6;
+  --border: #1f2937;
+
+  --btn: #0f172a;
+  --btn-border: #1f2937;
+  --btn-hover: #111827;
+
+  --accent: #60a5fa;
+  --accent-weak: #0b213f;
+}
+
+/* اسکین‌های اولیه (حس open-world) */
+:root[data-skin="misty"] {
+  --bg: radial-gradient(1200px 600px at 20% -10%, #a5b4fc55, transparent),
+        radial-gradient(800px 400px at 80% 0%, #93c5fd55, transparent),
+        linear-gradient(180deg, #eef2ff, #f8fafc 40%, #f1f5f9);
+}
+:root[data-skin="desert"] {
+  --bg: linear-gradient(180deg, #fff7ed, #fef3c7);
+}
+:root[data-skin="forest"] {
+  --bg: linear-gradient(180deg, #ecfdf5, #d1fae5);
+}
+
+/* ساختار کلی */
+html, body, #root { height: 100%; }
+body { margin:0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; }
+.app-root { min-height:100%; display:grid; place-items:start center; padding: 40px 20px 80px; position:relative; }
+
+/* کارت */
+.card {
+  width: 100%;
+  max-width: 880px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  padding: 16px;
+}
+
+/* هدر + آیکن منو */
+.header .brand { display:flex; align-items:center; gap:10px; }
+.icon-btn { background: var(--btn); color: var(--text); border:1px solid var(--btn-border); border-radius:8px; height:36px; width:36px; cursor:pointer; }
+.icon-btn:hover { background: var(--btn-hover); }
+
+.origin-banner { margin-top:8px; padding:8px 12px; border:1px dashed var(--border); border-radius:10px; background: rgba(0,0,0,0.02); }
+.dark .origin-banner { background: rgba(255,255,255,0.03); }
+
+/* دکمه/تب‌ها */
+.btn, .tab {
+  background: var(--btn);
+  color: var(--text);
+  border: 1px solid var(--btn-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.btn:hover, .tab:hover { background: var(--btn-hover); }
+.btn.primary, .tab.active { background: var(--accent); color:#fff; border-color: var(--accent); }
+
+/* گروه افزودن تسک یک‌خطی */
+.add { display:flex; gap:8px; align-items:center; margin-top:12px; flex-wrap:wrap; }
+.add input[type="text"], .add input[type="number"], .add input[type="date"], .add input[type="time"], .add select {
+  height: 40px; padding: 0 12px; border: 1px solid var(--border); border-radius: 10px; outline:none; background: #fff;
+}
+.dark .add input, .dark .add select { background: #0f172a; }
+
+/* مودال تنظیمات */
+.modal-backdrop { position: fixed; inset:0; background: rgba(0,0,0,.35); display:grid; place-items:center; z-index:50; }
+.modal { width: min(840px, 92vw); background: var(--card); border:1px solid var(--border); border-radius: 14px; padding: 12px; }
+.modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.modal-tabs { display:flex; gap:8px; margin-bottom:12px; }
+.modal-body { display:grid; gap:10px; }
+.row-sb { display:flex; align-items:center; justify-content:space-between; }
+
+/* سایر استایل‌های قبلی‌ات (task, toast, symbols ...) را نگه‌دار */
+/* ... بقیه‌ی فایل ... */
+
+.symbols{
+  position:fixed; top:8px; left:50%; transform:translateX(-50%);
+  display:flex; flex-wrap:wrap; gap:4px; font-size:22px;
+  pointer-events:none; max-width:80%;
+  z-index: 9999;            /* ← اضافه شد */
+}
+.toast{
+  position:fixed; top:20%; left:50%; transform:translateX(-50%);
+  background:#111827; color:#fff;
+  padding:8px 14px; border-radius:999px;
+  box-shadow:0 10px 20px rgba(0,0,0,.2);
+  font-weight:700; animation:fadeUp .9s;
+  z-index: 9999;            /* ← اضافه شد */
+}
+/* Add Task Bar (already present in your file, keep these additions) */
+.add { display:flex; gap:8px; align-items:center; margin-top:12px; flex-wrap:wrap; }
+
+/* Title: bigger + elastic */
+.add .titleInput{
+  flex:1 1 360px;
+  font-size:1.1rem;
+  padding:10px 14px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+/* XP: compact numeric + meter */
+.add .xpGroup{ display:flex; align-items:center; gap:6px; }
+.add .xpLabel{ font-size:11px; color:var(--muted); margin-left:2px; }
+.add .xpInput{
+  width:56px; text-align:center; padding:0 8px; height:38px;
+  border:1px solid var(--border); border-radius:8px;
+}
+.add .xpMeter{
+  width:80px; height:6px; border-radius:999px;
+  background:#e5e7eb; overflow:hidden;
+}
+.add .xpMeter > div{
+  height:100%; background:linear-gradient(90deg, #60a5fa, #f59e0b);
+  border-radius:999px; transition:width .2s ease;
+}
+
+/* Due in: compact number + unit */
+.add .dueGroup{ display:flex; align-items:center; gap:6px; }
+.add .dueInput{ width:56px; text-align:center; height:38px; border:1px solid var(--border); border-radius:8px; }
+.add .dueSelect{ min-width:56px; height:38px; border:1px solid var(--border); border-radius:8px; padding:0 8px; }
+
+/* Icon buttons + Gamified Add */
+.add .aiBtn{ width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+
+.add .addBtn.gamified{
+  font-weight:700;
+  color:#fff;
+  border-color:transparent;
+  transition:transform .08s ease, box-shadow .15s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+.add .addBtn.gamified:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.2); }
+.add .addBtn.gamified:active{ transform:translateY(0); box-shadow:0 6px 18px rgba(0,0,0,.15); }
+/* Title: bigger & elastic */
+.add .titleInput{
+  flex:1 1 360px;
+  font-size:1.1rem;
+  padding:10px 14px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+/* XP group (compact) */
+.add .xpGroup .xpLabel{ font-size:11px; color:var(--muted); }
+.add .xpInput{
+  text-align:center; height:38px;
+  border:1px solid var(--border); border-radius:8px; padding:0 8px;
+  /* hide number steppers */
+  -moz-appearance: textfield;
+}
+.add .xpInput::-webkit-outer-spin-button,
+.add .xpInput::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+
+/* Due group (compact) */
+.add .dueInput{
+  width:56px; text-align:center; height:38px;
+  border:1px solid var(--border); border-radius:8px; padding:0 8px;
+}
+.add .dueSelect{
+  min-width:56px; height:38px;
+  border:1px solid var(--border); border-radius:8px; padding:0 8px;
+}
+
+/* AI button stays circular */
+.add .aiBtn{
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* Primary Add button (simple, no gradient now) */
+.add .addBtn{ font-weight:600; }
+/* Header layout cleanup */
+.header { display: grid; gap: 12px; }
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.brand-left { display:flex; align-items:center; gap:12px; }
+.header h1 { margin: 0; font-size: 22px; letter-spacing: .2px; }
+.stats {
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+  align-items: start;
+}
+.stat .label { color: var(--muted); font-size: 12px; }
+.stat .value { font-weight: 600; }
+
+/* Better dark mode (readable text & softer surfaces) */
+.dark{
+  --bg:#0d1220;             /* slightly lighter than before */
+  --card:#0f172a;
+  --text:#e5e7eb;           /* brighter text */
+  --muted:#9aa4b6;
+  --border:#243047;
+
+  --btn:#121a2b;
+  --btn-border:#243047;
+  --btn-hover:#162236;
+
+  --accent:#5da2ff;
+  --accent-weak:#0c1e3a;
+}
+
+.dark body { background: var(--bg); color: var(--text); }
+.dark .card {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+
+/* inputs are readable in dark */
+input, textarea, select { color: var(--text); }
+::placeholder { color: color-mix(in srgb, var(--muted) 80%, transparent); }
+.dark input, .dark textarea, .dark select {
+  background:#0e1730;       /* softer than full black */
+  border-color:#2a3752;
+}
+.dark .btn { background: var(--btn); border-color: var(--btn-border); }
+.dark .btn:hover { background: var(--btn-hover); }
+
+/* progress bar in dark: softer track, clear fill */
+.dark .bar::-webkit-progress-bar { background: rgba(93,162,255,.15); }
+.dark .bar::-webkit-progress-value { background: linear-gradient(90deg,#22c55e,#16a34a); }
+
+/* badges less glaring in dark */
+.dark .badge { background:#0f1b2c; color:#c7d2fe; border-color:#203052; }
+.dark .badge.on { background:#0d2748; color:#9ec8ff; border-color:#1f3b63; }
+/* XP Overview */
+.xp-overview{ display:grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap:10px; margin-top:12px; }
+.xp-pill{
+  display:flex; gap:10px; align-items:center;
+  background: var(--card); border:1px solid var(--border); border-radius:12px; padding:10px;
+}
+.xp-ico{
+  width:36px; height:36px; border-radius:10px;
+  display:grid; place-items:center; color:#fff; font-size:18px;
+}
+.xp-info{ flex:1; }
+.xp-name{ font-weight:600; letter-spacing:.2px; }
+.xp-meta{ display:flex; gap:10px; color:var(--muted); font-size:12px; }
+.xp-bar{ height:6px; border-radius:999px; background:#e5e7eb; overflow:hidden; margin-top:6px; }
+.xp-bar>div{ height:100%; border-radius:999px; }
+.dark .xp-bar{ background:#223049; }
+/* Modal tweaks (you already have .modal/.modal-backdrop/.row-sb) */
+.modal .hint { color: var(--muted); font-size: 12px; }
+.modal .mono { font-variant-numeric: tabular-nums; }
+
+/* Reuse of xp-pill/xp-ico/xp-info from XPOverview */
+.xp-pill{
+  display:flex; gap:10px; align-items:center;
+  background: var(--card); border:1px solid var(--border); border-radius:12px; padding:10px;
+}
+.xp-ico{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center; color:#fff; font-size:18px;
+}
+.xp-info{ flex:1; }
+.xp-name{ font-weight:600; letter-spacing:.2px; }
+.xp-meta{ display:flex; gap:10px; color:var(--muted); font-size:12px; }
+
+/* small numeric input used inside modal */
+.xp-chip-input{
+  height:32px; text-align:center;
+  border:1px solid var(--border); border-radius:8px; padding:0 8px;
+  -moz-appearance:textfield;
+}
+.xp-chip-input::-webkit-outer-spin-button,
+.xp-chip-input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+// src/components/SkillTree.jsx
+// Lightweight skill tree view using plain HTML/CSS (no react-flow to keep bundle small)
+import React, { useEffect, useState } from "react";
+import { BR } from "../core/perks.js";
+
+export default function SkillTree() {
+  const [state, setState] = useState(null);
+  const [ownedPerks, setOwnedPerks] = useState([]);
+
+  useEffect(() => {
+    try {
+      const s = JSON.parse(localStorage.getItem("qj_multixp_state_v1") || "{}");
+      setState(s);
+    } catch { /* noop */ }
+    try {
+      const p = JSON.parse(localStorage.getItem("qj_perks_v1") || "[]");
+      setOwnedPerks(p || []);
+    } catch { /* noop */ }
+  }, []);
+
+  const xp = state?.xp || {};
+  const node = (id, label, req) => {
+    const ok = (xp[req.branch] || 0) >= req.at;
+    const owned = ownedPerks.includes(id);
+    return (
+      <div className={`st-node ${ok ? "unlocked" : ""} ${owned ? "owned" : ""}`} key={id}>
+        <div className="st-title">{label}</div>
+        <div className="st-req">Req: {req.branch} {req.at}</div>
+        <div className="st-status">{owned ? "Owned" : ok ? "Unlocked" : "Locked"}</div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="card" style={{ display:"grid", gap:12 }}>
+      <h2>Skill Tree</h2>
+      <div className="st-grid">
+        {/* Row 1 */}
+        {node("fast_learner", "Fast Learner", { branch: BR.WISDOM, at: 10 })}
+        {node("influencer", "Influencer", { branch: BR.SOCIAL, at: 15 })}
+        {/* نمونه‌هایی برای توسعهٔ بعدی */}
+        {node("iron_body", "Iron Body", { branch: BR.HEALTH, at: 12 })}
+        {node("swift_feet", "Swift Feet", { branch: BR.ATHLETICS, at: 12 })}
+      </div>
+      <div className="hint">
+        Nodes turn <b>Unlocked</b> when XP requirement is met; they become <b>Owned</b> automatically the next time you gain XP.
+      </div>
+    </div>
+  );
+}
+/* --- Skill Forest / Trees --- */
+.sf-forest {
+  display: grid;
+  gap: 12px;
+}
+
+/* tree card */
+.sf-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  background: var(--card);
+}
+
+/* header */
+.sf-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.sf-head-left { display:flex; align-items:center; gap:8px; }
+.sf-dot { width: 12px; height: 12px; border-radius: 999px; }
+.sf-title { margin: 0; font-size: 16px; }
+
+.sf-meter-wrap { display:grid; gap:4px; }
+.sf-meter {
+  width: 240px;
+  height: 8px;
+  background: var(--accent-weak);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.sf-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+.sf-meter-caption { font-size: 12px; color: var(--muted); }
+
+/* rows & nodes */
+.sf-grid { display: grid; gap: 12px; }
+.sf-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  position: relative;
+}
+
+/* node */
+.sf-node {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.sf-node .sf-node-chip {
+  position: absolute; top: -6px; left: -6px;
+  width: 14px; height: 14px; border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+.sf-node-title { font-weight: 700; }
+.sf-node-req { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.sf-node-status { font-size: 12px; margin-top: 6px; }
+
+.sf-node.locked { opacity: .65; }
+.sf-node.unlocked { border-color: #a7f3d0; box-shadow: 0 0 0 3px rgba(16,185,129,.12); }
+.sf-node.owned { border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(59,130,246,.15); transform: translateY(-1px); }
+
+/* dark polish */
+.dark .sf-meter { background: #0b2130; border-color: #132133; }
+.dark .sf-node { background: #0f172a; }
+/* add to src/index.css (near the end is fine) */
+
+/* --- Achievements floating sidebar --- */
+.ach-sidebar{
+  position:fixed; right:12px; top:96px; z-index:60;
+  width:220px; max-height:70vh; overflow:auto;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+.ach-header{
+  font-weight:700; padding:10px 12px; border-bottom:1px solid var(--border);
+}
+.ach-list{ padding:8px; display:grid; gap:6px; }
+.ach-item{
+  display:flex; gap:10px; align-items:center;
+  padding:6px 8px; border:1px solid var(--border);
+  border-radius:10px; background:var(--btn);
+}
+.ach-ico{ width:28px; height:28px; display:grid; place-items:center; font-size:18px; }
+.ach-meta{ min-width:0; }
+.ach-name{ font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ach-date{ font-size:11px; color:var(--muted); }
+@media (max-width: 980px){
+  .ach-sidebar{ display:none; } /* hide on small screens */
+}
+/* add to src/index.css */
+
+/* --- Skill Forest --- */
+.sf-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:12px;
+}
+
+.sf-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:12px;
+}
+@media (max-width:720px){
+  .sf-grid{ grid-template-columns: 1fr; }
+}
+
+.sf-node{
+  position:relative;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+  overflow:hidden;
+}
+.sf-conn{
+  position:absolute; inset:auto 0 0 0; height:60px; width:100%; pointer-events:none;
+}
+
+.sf-badge{
+  display:flex; gap:8px; align-items:center;
+  border:1.5px solid; border-radius:12px; padding:8px; background:var(--card);
+}
+.sf-ico{
+  width:34px; height:34px; border-radius:10px; display:grid; place-items:center; color:#fff; font-size:18px;
+}
+.sf-title{ min-width:0; }
+.sf-name{ font-weight:700; line-height:1; }
+.sf-level{ font-size:12px; color:var(--muted); }
+
+.sf-bar{
+  margin-top:8px; height:8px; border-radius:6px; background:var(--accent-weak);
+  overflow:hidden; border:1px solid var(--border);
+}
+.sf-bar-fill{ height:100%; border-radius:6px; }
+
+.sf-traits{
+  margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;
+}
+.sf-chip{
+  padding:4px 8px; border-radius:999px; border:1px dashed var(--border);
+  font-size:12px; color:var(--muted); background:transparent;
+}
+.sf-chip.on{
+  border-style:solid; color:#0b1220; background:#a7f3d0; border-color:#34d399; /* unlocked glow */
+}
+.dark .sf-chip.on{ color:#e7ffee; background:#065f46; border-color:#34d399; }

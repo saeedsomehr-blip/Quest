@@ -1,0 +1,38 @@
+.addTaskBar .row {
+  display:flex; gap:8px; align-items:center;
+}
+
+.titleInput {
+  flex:1;
+  font-size:1.1rem;
+  padding:10px 14px;
+  border:1px solid #ccc;
+  border-radius:10px;
+}
+
+.xpGroup, .dueGroup {
+  display:flex; align-items:center; gap:4px;
+}
+
+.xpInput, .dueInput {
+  width:50px; text-align:center;
+  padding:6px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+.dueSelect {
+  padding:6px;
+  border-radius:6px;
+}
+
+.aiBtn {
+  border-radius:50%;
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.addBtn {
+  padding:8px 16px;
+  font-weight:600;
+}
